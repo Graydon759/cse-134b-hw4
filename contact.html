@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<!--TODO get the message button to work and the actual messaging functioning to work-->
+<!--TODO link to my actual linked in-->
+
+<html lang = "en">
+    <head>
+	    <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Personal Portfolio Contact Me Page for CSE134b">
+        <meta name="keywords" content="HTML, CSS, JavaScript">
+        <meta name="author" content="Graydon L">
+        <title>Contact Me - Portfolio</title>
+        <link href="images/favicon.ico" rel="icon">
+        <link href="styles/main.css" rel="stylesheet">
+        <style>.navigation_bar{border:1px solid #777;}</style>
+    </head>
+    <body>
+        <header>
+            <nav class="navigation_bar">
+                <ul>
+                    <li class="navigation_item"><a href="index.html">Home</a></li>
+                    <li class="navigation_item"><a href="about.html">About Me</a></li>
+                    <li class="navigation_item"><a href="projects.html">Projects</a></li>
+                    <li class="navigation_item"><a href="fun.html">Fun</a></li>
+                    <li class="navigation_item"><a href="experiments.html">Experiments</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section id="contact-info">
+                <h1>Contact Me</h1>
+            
+                <form action="#" method="get">
+                  <fieldset>
+                    <legend>Send me a message</legend>
+            
+                    <p>
+                      <label for="name">Name</label><br />
+                      <input id="name" name="name" type="text" />
+                    </p>
+            
+                    <p>
+                      <label for="email">Email</label><br />
+                      <input id="email" name="email" type="email" />
+                    </p>
+            
+                    <p>
+                      <label for="msg">Message</label><br />
+                      <textarea id="msg" name="msg" rows="4" cols="40"></textarea>
+                    </p>
+            
+                    <p><button type="submit">Send</button></p>
+                  </fieldset>
+                </form>
+            
+                <p>You can also reach me on <a href="https://www.linkedin.com/">LinkedIn</a>.</p>
+              </section>
+        </main>
+        <footer>
+            <hr/>
+            <p><small>This page was made with &hearts; by Graydon Leongkaye</small></p>
+        </footer>
+    </body>
+</html>

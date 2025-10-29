@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<!--TODO add more to the page (hobbies and interests)-->
+
+<html lang = "en">
+    <head>
+	    <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Personal Portfolio Fun Page for CSE134b">
+        <meta name="keywords" content="HTML, CSS, JavaScript">
+        <meta name="author" content="Graydon L">
+        <title>Fun - Portfolio</title>
+        <link href="images/favicon.ico" rel="icon">
+        <link href="styles/main.css" rel="stylesheet">
+        <style>.navigation_bar{border:1px solid #777;}</style>
+    </head>
+    <body>
+        <header>
+            <nav class="navigation_bar">
+                <ul>
+                    <li class="navigation_item"><a href="index.html">Home</a></li>
+                    <li class="navigation_item"><a href="about.html">About Me</a></li>
+                    <li class="navigation_item"><a href="projects.html">Projects</a></li>
+                    <li class="navigation_item"><a href="contact.html">Contact Me</a></li>
+                    <li class="navigation_item"><a href="experiments.html">Experiments</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section id = "hobbies_and_interests">
+                <h1>Fun!</h1>
+                <h3>My Hobbies and Interests</h3>
+                <div id = "hobbies">
+                  <p><span>🏓</span> Pickleball</p>
+                </div>
+                <div id = "interests">
+                    <p><span>🏋</span> Gym</p>
+                  </div>
+              </section>
+              <section id = "req_iframe">
+                <p>Reference site:</p>
+                <iframe src="https://example.com" title="Example website preview" width="320" height="160"></iframe>
+              </section>
+              <section id = "req_dialog">
+                <dialog open>
+                    <p>Greetings, one and all!</p>
+                    <form method="dialog">
+                      <button>OK</button>
+                    </form>
+                  </dialog>
+              </section>
+              <section id = "req_pic">
+                <picture>
+                    <source srcset="https://via.placeholder.com/600x300.webp" type="image/webp" />
+                    <img src="https://via.placeholder.com/600x300" alt="placeholder project banner" width="600" height="300" />
+                  </picture>
+              </section>
+              <section id = "math_ec">
+                <math display="block">
+                    <mi>E</mi>
+                    <mo>=</mo>
+                    <mi>m</mi>
+                    <msup>
+                      <mi>c</mi>
+                      <mn>2</mn>
+                    </msup>
+                </math>
+              </section>
+        </main>
+        <footer>
+            <hr/>
+            <p><small>This page was made with &hearts; by Graydon Leongkaye</small></p>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Hellow World using Custom Element</title>
+  <script>
+    class HelloConsole extends HTMLElement {
+      connectedCallback() {
+        console.log("Hello world from <hello-console>!");
+      }
+    }
+    customElements.define("hello-console", HelloConsole);
+  </script>
+</head>
+<body>
+</body>
+</html>
