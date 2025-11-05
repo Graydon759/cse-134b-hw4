@@ -10,7 +10,6 @@
         <title>About Me - Portfolio</title>
         <link href="images/favicon.ico" rel="icon">
         <link href="styles/main.css" rel="stylesheet">
-        <style>.navigation_bar{border:1px solid #777;}</style>
     </head>
     <body>
         <header>
@@ -28,8 +27,13 @@
             <section id = "personal_info">
                <h1>About Me</h1>
                 <figure id = "img_of_my_face">
-                    <img src="https://via.placeholder.com/300x180" alt="Placeholder portrait" width="300" height="180" />
-                    <figcaption>Placeholder image.</figcaption>
+                    <picture>
+                        <source srcset="images/portrait_large.jpg" media ="(min-width: 1024px)" type="image/jpeg">
+                        <source srcset="images/portrait_medium.jpg" media ="(min-width: 600px)" type="image/jpeg">
+                        <source srcset="images/portrait_small.jpg" type="images/jpeg">
+                    <img src="images/portrait.jpg" alt ="Portrait photo of Graydon L">
+                    <figcaption>Photo of me at a soccer game.</figcaption>
+                    </picture>
                 </figure>
                <p>My name is <i>Graydon Leongkaye</i> and I am current a senior studying Computer Science at <b>UCSD</b></p>
                <h2>Bio</h2>

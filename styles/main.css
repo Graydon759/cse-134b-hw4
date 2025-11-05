@@ -1,0 +1,175 @@
+:root{
+    --text_color:rgba(255,255,255,0.72); /*like an off white*/
+    --background_color: #0f172a; /*dark blue*/
+    --nav_bar_background_color:#0a1120; /*darker blue*/
+    --nav_bar_boarder_and_hover_color: rgba(255,255,255,0.1); /*gray*/
+    --nav_bar_accent: color(srgb 0.2 0.2 0.7);
+    --fig_caption_text: rgba(255,255,255,0.6);
+}
+
+@property --text_color{
+    syntax: "<color>";
+    inherits: true;
+    initial-value: rgba(255,255,255,0.72);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* CSS Reset*/
+*{
+    margin: 0;
+    padding: 0;
+}
+
+/*makes it so links dont change color after you click*/
+a:visited{
+    color:inherit;
+}
+
+body{
+    background-color: var(--background_color, #0f172a);
+    color: var(--text_color, #e6e6e6);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6rem;
+}
+
+main ol, main ul{
+    padding-left: 1.25rem;
+}
+
+html, body{
+    min-height: 100dvh;
+}
+
+main{
+    width: min(100dvw - 2rem, 72rem);
+    margin-inline: auto;
+    padding-inline: clamp(1rem,3dvw,2rem);
+}
+
+img,svg,video,canvas,iframe{
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+body > h1{
+    font-family: 'Roboto Slab', serif;
+}
+
+h1{
+    font-family: 'Roboto Slab', serif;
+}
+
+header nav ul{
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    list-style: none;
+}
+
+.navigation_bar{
+    background-color: var(--nav_bar_background_color); 
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--nav_bar_boarder_and_hover_color);
+    width: 100%;
+    margin-bottom: 0.75rem;
+}
+
+.navigation_item a {
+    color: var(--nav_bar_accent);
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    display: inline-block;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.navigation_item a:hover {
+    background-color: var(--nav_bar_boarder_and_hover_color);
+    transform: translateY(-2px);
+    text-decoration: underline;
+}
+
+footer{
+    width: min(100% - 2rem, 72rem);
+    margin: 1.5rem auto 1rem;
+}
+
+#img_of_my_face {
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem 0;
+}
+
+#img_of_my_face picture, #img_of_my_face img {
+  width: 100%;
+  max-width: 20rem;
+  height: auto;
+  border-radius: 0.7rem;
+  object-fit: cover;
+  object-position: center;
+}
+
+#img_of_my_face figcaption {
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 0.5rem;
+  color: var(--fig_caption_text);
+}
+
+#req_dialog dialog{
+    background-color: color-mix(in srgb, red 80%, black);
+    /**/
+    color: var(--text_color);
+    padding: 1.25rem;
+    text-align: center;
+    position: fixed;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+html{
+    font-size: 100%;
+}
+/* For phones */
+@media (max-width: 599px) {
+    body { line-height: 1.6; }
+  
+    .navigation_bar { padding: 0.5rem 0; }
+
+    header nav ul {
+      gap: 0.5rem;
+      flex-wrap: wrap;          
+      padding-inline: 0.5rem;
+    }
+    .navigation_item a {
+      padding: 0.6rem 0.9rem; 
+    }
+  
+    main { padding-inline: clamp(0.75rem, 4dvw, 1.25rem); }
+  }
+  
+  /* For tablets */
+  @media (min-width: 600px) and (max-width: 1023px) {
+    main { width: min(100dvw - 3rem, 72rem); }
+    header nav ul { gap: 0.75rem; }
+  }
+  
+  /* For Computers*/
+  @media (min-width: 1024px) {
+    main { width: min(100dvw - 4rem, 72rem); }
+    header nav ul { gap: 1rem; }
+  }
+  
+  @supports (selector(&)) {
+    #contact-info {
+      form {
+        input, textarea { width: 100%; }
+      }
+    }
+  }
