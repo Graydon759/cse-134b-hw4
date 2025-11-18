@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: white;
+      margin: 0;
+      padding: 1rem;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    form{
+      max-width: 30rem;
+      margin: 0 auto;
+      background: white;
+      border: 0.1rem solid gray;
+      padding: 0.7rem;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    label{
+      display: block;
+      font-weight: bold;
+      font-size: 1rem;
+      margin: 0.5rem;
+    }
+
+    label:has(+ input:required)::after, label:has(+ textarea:required)::after {
+      content: " *";
+      color: red;
+    }
+
+    input[type="text"], input[type="email"], select, textarea {
+      width: 100%;
+      padding: 0.6rem;
+      border: 0.1rem solid #bbb;
+      border-radius: 0.25rem;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+
+    input:required:invalid, textarea:required:invalid {
+      border-color: red;
+    }
+
+    input:valid, textarea:valid {
+      border-color: green;
+    }
+
+    input:required:invalid:placeholder-shown,
+    textarea:required:invalid:placeholder-shown {
+      border-color: gray;
+    }
+
+    input:required:invalid:not(:placeholder-shown),
+    textarea:required:invalid:not(:placeholder-shown) {
+      border-color: red;
+    }
+
+    input:valid, textarea:valid {
+      border-color: green;
+    }
+
+    .msg { 
+      display: none; 
+      min-height: 1.1rem;
+      font-size: 0.9rem;
+    }
+    .msg.error { 
+      color: darkred;
+    }
+    .msg.info  { 
+      color: black; 
+    }
+
+    input[required]:invalid:not(:placeholder-shown) + .msg-required,
+    textarea[required]:invalid:not(:placeholder-shown) + .msg-required,
+    input[type="email"]:invalid:not(:placeholder-shown) + .msg-email {
+      display: block;
+    }
+
+    input:valid + .msg-required,
+    textarea:valid + .msg-required,
+    input:valid + .msg-email {
+      display: none;
+    }
+
+
+    input:valid ~ .msg-required,
+    textarea:valid ~ .msg-required,
+    input:valid ~ .msg-email,
+    textarea:valid ~ .msg-email {
+      display: none;
+    }
+    input[type="email"]:invalid:not(:placeholder-shown) ~ .msg-email {
+      display: block;
+    }
+
+    output {
+       display: block; min-height: 1.2em; font-size: 0.9rem; 
+    }
+
+    form:has(:invalid) #error-out::before {
+      content: "Please fix the highlighted fields or fill empty fields.";
+      color: darkred;
+    }
+
+    form:has(:required:valid):not(:has(:invalid)) #info-out::before {
+      content: "All required fields look good.";
+      color: green;
+    }
+
+
+    button {
+      margin-top: 1rem;
+      padding: 0.75rem;
+      border: 0.1rem;
+      background-color: darkgray;
+      color: black;
+      border-radius: 0.25rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover,
+    button:focus-visible {
+    background-color: blue;
+    color: white;
+    }
+
+    output {
+      display: block;
+      min-height: 1.2em;
+      font-size: 0.9rem;
+    }
+
+    input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible {
+        outline: 0.2rem solid #005fcc;   /* high-contrast blue */
+        outline-offset: 0.15rem;
+    }
+
+    @keyframes flashBorder { 
+        0% { box-shadow: 0 0 0 0 rgba(220,0,0,.7) }
+        100% { box-shadow: 0 0 0 6px rgba(220,0,0,0) }
+    }
+    .flash { animation: flashBorder 300ms ease-out; }
+    .illegal-msg {
+        display: block;
+        color: #8b0000;
+        font-weight: bold;
+        margin-top: 0.25rem;
+    }
+    #comments-counter { font-size: 0.9rem; color:#444; min-height:1.1rem; }
+    #comments-counter.warn { color:#b45309; }
+    #comments-counter.over { color:#8b0000; }
+
+</style>
+</head>
+<body>
+
+
+  <h1>Contact Me</h1>
+
+  <form id="feedback_form" action="https://httpbin.org/post" method="POST" novalidate>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required 
+    placeholder="Your name" minlength="2" maxlength="50" pattern="[A-Za-z][A-Za-z' -]{1,49}">
+    <span class="msg error msg-required">Please enter your name (letters, spaces, hyphens, apostrophes only).</span>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required
+    placeholder="name@example.com" maxlength="100">
+    <span class="msg error msg-email">Please enter a valid email address (like name@example.com).</span>
+
+    <label for="subject">Subject:</label>
+    <input type="text" id="subject" name="subject"
+    placeholder="Subject (optional)" maxlength="100" pattern="[^<>]{0,100}">
+    <span class="msg info">Up to 100 characters. (No angle brackets).</span>
+
+    <label for="reason">Reason for Contact:</label>
+    <select id="reason" name="reason">
+      <option value="feedback">Feedback</option>
+      <option value="question">Question</option>
+      <option value="collaboration">Collaboration</option>
+    </select>
+
+    <label for="comments">Comments:</label>
+    <textarea id="comments" name="comments" rows="5" placeholder="Write your message here..." required
+    minlength="10" maxlength="1000"></textarea>
+    <span class="msg error msg-required">Please add at least 10 characters (max 1000).</span>
+    
+    <div id="comments-counter"></div>
+
+    <input type="hidden" name="possible_bot" value="true">
+    <input type="hidden" id="form-errors" name="form_errors" value="[]">
+
+    <output id="error-out"></output>
+    <output id="info-out"></output>
+
+    <button type="submit">Send</button>
+  </form>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const form   = document.getElementById('feedback_form');
+        const nameEl = document.getElementById('name');
+        const emailEl= document.getElementById('email');
+        const subjEl = document.getElementById('subject');
+        const comEl  = document.getElementById('comments');
+        const errorOut = document.getElementById('error-out');
+        const infoOut  = document.getElementById('info-out');
+        const counter  = document.getElementById('comments-counter');
+        const formErrorsHidden = document.getElementById('form-errors');
+  
+        const errorsLog = [];
+  
+        function flash(el) {
+            el.classList.remove('flash');
+            void el.offsetWidth;
+            el.classList.add('flash');
+        }
+        function showTempError(message, ms = 1600) {
+            errorOut.innerHTML = `<span class="illegal-msg" role="alert">${message}</span>`;
+            clearTimeout(showTempError._t);
+            showTempError._t = setTimeout(() => {
+                if (errorOut.textContent.trim() === message) errorOut.textContent = '';
+            }, ms);
+        }
+  
+        function setFieldCustomMessage(el) {
+            el.setCustomValidity('');
+            const v = el.value.trim();
+    
+            if (el === nameEl) {
+            if (v.length < 2) el.setCustomValidity('Name must be at least 2 characters.');
+            else if (!/^[A-Za-z][A-Za-z' -]{1,49}$/.test(v))
+                el.setCustomValidity("Only letters, spaces, hyphens, apostrophes; first char must be a letter.");
+            }
+    
+            if (el === emailEl) {
+            if (v && !el.checkValidity()) {
+                el.setCustomValidity('Please enter a valid email address like name@example.com.');
+            }
+            }
+    
+            if (el === subjEl) {
+            if (v.includes('<') || v.includes('>')) {
+                el.setCustomValidity('Subject cannot include < or > characters.');
+            }
+            }
+    
+            if (el === comEl) {
+            const max = el.maxLength > 0 ? el.maxLength : 1000;
+            if (v.length < 10) el.setCustomValidity('Comments must be at least 10 characters.');
+            else if (v.length > max) el.setCustomValidity(`Comments must be ${max} characters or fewer.`);
+            }
+        }
+
+        [nameEl, emailEl, subjEl, comEl].forEach(el => {
+            el.addEventListener('input', () => { setFieldCustomMessage(el); });
+            el.addEventListener('blur',  () => { setFieldCustomMessage(el); });
+        });
+  
+        function illegalCharGuard(el, testFn, label) {
+            el.addEventListener('keydown', (e) => {
+            if (e.key.length !== 1) return;
+            const ch = e.key;
+            if (!testFn(ch, el.value)) {
+                e.preventDefault();
+                flash(el);
+                showTempError(`Illegal character for ${label}.`);
+            }
+            });
+        }
+
+        illegalCharGuard(nameEl, (ch, current) => {
+            const first = current.length === 0;
+            return first ? /^[A-Za-z]$/.test(ch) : /^[A-Za-z' -]$/.test(ch);
+        }, 'Name');
+        
+        illegalCharGuard(subjEl, (ch) => !/[<>]/.test(ch), 'Subject');
+  
+        function updateCounter() {
+            const max = comEl.maxLength > 0 ? comEl.maxLength : 1000;
+            const left = max - comEl.value.length;
+            counter.textContent = `${left} characters left`;
+            counter.classList.toggle('warn', left <= 50 && left >= 0);
+            counter.classList.toggle('over', left < 0);
+        }
+        comEl.addEventListener('input', updateCounter);
+        updateCounter();
+  
+        form.addEventListener('submit', (e) => {
+            [nameEl, emailEl, subjEl, comEl].forEach(setFieldCustomMessage);
+    
+            const invalids = [nameEl, emailEl, subjEl, comEl].filter(el => !el.checkValidity());
+            if (invalids.length) {
+                e.preventDefault();
+                const when = new Date().toISOString();
+                invalids.forEach(el => {
+                errorsLog.push({
+                    field: el.name,
+                    value: el.value,
+                    issue: el.validationMessage || 'invalid',
+                    time: when
+                });
+                });
+                form.reportValidity();
+                showTempError('Please review the errors above.');
+                return;
+            }
+
+            formErrorsHidden.value = JSON.stringify(errorsLog);
+            infoOut.textContent = 'Submitting...';
+        });
+    });
+    </script>
+  
+
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: white;
+      margin: 0;
+      padding: 1rem;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    form{
+      max-width: 30rem;
+      margin: 0 auto;
+      background: white;
+      border: 0.1rem solid gray;
+      padding: 0.7rem;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    label{
+      display: block;
+      font-weight: bold;
+      font-size: 1rem;
+      margin: 0.5rem;
+    }
+
+    label:has(+ input:required)::after, label:has(+ textarea:required)::after {
+      content: " *";
+      color: red;
+    }
+
+    input[type="text"], input[type="email"], select, textarea {
+      width: 100%;
+      padding: 0.6rem;
+      border: 0.1rem solid #bbb;
+      border-radius: 0.25rem;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+
+    input:required:invalid, textarea:required:invalid {
+      border-color: red;
+    }
+
+    input:valid, textarea:valid {
+      border-color: green;
+    }
+
+    input:required:invalid:placeholder-shown,
+    textarea:required:invalid:placeholder-shown {
+      border-color: gray;
+    }
+
+    input:required:invalid:not(:placeholder-shown),
+    textarea:required:invalid:not(:placeholder-shown) {
+      border-color: red;
+    }
+
+    input:valid, textarea:valid {
+      border-color: green;
+    }
+
+    .msg { 
+      display: none; 
+      min-height: 1.1rem;
+      font-size: 0.9rem;
+    }
+    .msg.error { 
+      color: darkred;
+    }
+    .msg.info  { 
+      color: black; 
+    }
+
+    input[required]:invalid:not(:placeholder-shown) + .msg-required,
+    textarea[required]:invalid:not(:placeholder-shown) + .msg-required,
+    input[type="email"]:invalid:not(:placeholder-shown) + .msg-email {
+      display: block;
+    }
+
+    input:valid + .msg-required,
+    textarea:valid + .msg-required,
+    input:valid + .msg-email {
+      display: none;
+    }
+
+
+    input:valid ~ .msg-required,
+    textarea:valid ~ .msg-required,
+    input:valid ~ .msg-email,
+    textarea:valid ~ .msg-email {
+      display: none;
+    }
+    input[type="email"]:invalid:not(:placeholder-shown) ~ .msg-email {
+      display: block;
+    }
+
+    output {
+       display: block; min-height: 1.2em; font-size: 0.9rem; 
+    }
+
+    form:has(:invalid) #error-out::before {
+      content: "Please fix the highlighted fields or fill empty fields.";
+      color: darkred;
+    }
+
+    form:has(:required:valid):not(:has(:invalid)) #info-out::before {
+      content: "All required fields look good.";
+      color: green;
+    }
+
+
+    button {
+      margin-top: 1rem;
+      padding: 0.75rem;
+      border: 0.1rem;
+      background-color: darkgray;
+      color: black;
+      border-radius: 0.25rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover,
+    button:focus-visible {
+     background-color: blue;
+      color: white;
+    }
+
+    output {
+      display: block;
+      min-height: 1.2em;
+      font-size: 0.9rem;
+    }
+
+   input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible {
+      outline: 0.2rem solid #005fcc;   /* high-contrast blue */
+      outline-offset: 0.15rem;
+    }
+
+</style>
+</head>
+<body>
+
+  <h1>Contact Me</h1>
+
+  <form id="feedback_form" action="https://httpbin.org/post" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required 
+    placeholder="Your name" minlength="2" maxlength="50" pattern="[A-Za-z][A-Za-z' -]{1,49}">
+    <span class="msg error msg-required">Please enter your name (letters, spaces, hyphens, apostrophes only).</span>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required
+    placeholder="name@example.com" maxlength="100">
+    <span class="msg error msg-email">Please enter a valid email address (like name@example.com).</span>
+
+    <label for="subject">Subject:</label>
+    <input type="text" id="subject" name="subject"
+    placeholder="Subject (optional)" maxlength="100" pattern="[^<>]{0,100}">
+    <span class="msg info">Up to 100 characters. (No angle brackets).</span>
+
+    <label for="reason">Reason for Contact:</label>
+    <select id="reason" name="reason">
+      <option value="feedback">Feedback</option>
+      <option value="question">Question</option>
+      <option value="collaboration">Collaboration</option>
+    </select>
+
+    <label for="comments">Comments:</label>
+    <textarea id="comments" name="comments" rows="5" placeholder="Write your message here..." required
+    minlength="10" maxlength="1000"></textarea>
+    <span class="msg error msg-required">Please add at least 10 characters (max 1000).</span>
+    
+    <input type="hidden" name="possible_bot" value="true">
+
+    <output id="error-out"></output>
+    <output id="info-out"></output>
+
+    <button type="submit">Send</button>
+  </form>
+
+</body>
+</html>
