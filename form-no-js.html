@@ -3,13 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Form</title>
+  <meta name="description" content="Personal Portfolio Contact Me Page for CSE134b">
+  <meta name="keywords" content="HTML, CSS, JavaScript">
+  <meta name="author" content="Graydon L">
+  <title>Contact Me - Portfolio</title>
+  <link href="images/favicon.ico" rel="icon">
+  <link href="styles/main.css" rel="stylesheet">
+  <script src="scripts/site.js" defer></script>
+  <title>Contact Form with NO JS</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       font-family: Arial, sans-serif;
       background-color: white;
       margin: 0;
       padding: 1rem;
+      color: var(--text_color);
+      background-color: var(--background_color);
     }
 
     h1 {
@@ -47,6 +58,8 @@
       border-radius: 0.25rem;
       font-size: 1rem;
       box-sizing: border-box;
+      background-color: var(--background_color);
+      color: var(--text_color);    
     }
 
 
@@ -153,7 +166,16 @@
 </style>
 </head>
 <body>
-
+  <header>            
+    <button id="theme-toggle" hidden type="button" aria-pressed="false">
+      Switch to Dark Theme
+    </button>
+    <noscript>
+      <p style="font-size:0.85rem;">
+          Theme toggle requires JavaScript. Default light theme is shown.
+      </p>
+    </noscript>
+  </header>
   <h1>Contact Me</h1>
 
   <form id="feedback_form" action="https://httpbin.org/post" method="POST">

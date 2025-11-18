@@ -1,11 +1,32 @@
-:root{
-    --text_color:rgba(255,255,255,0.72); /*like an off white*/
-    --background_color: #0f172a; /*dark blue*/
-    --nav_bar_background_color:#0a1120; /*darker blue*/
-    --nav_bar_boarder_and_hover_color: rgba(255,255,255,0.1); /*gray*/
+:root {
+    color-scheme: light dark;
+
+    /* Light Theme (the default) */
+    --text_color: black;              /* dark gray/navy text */
+    --background_color: #f9fafb;                   /* light gray */
+    --nav_bar_background_color: #e5e7eb;           /* light navbar */
+    --nav_bar_boarder_and_hover_color: rgba(15,23,42,0.12);
+    --nav_bar_accent: color(srgb 0.1 0.1 0.5);     /* bluish link */
+    --fig_caption_text: rgba(55,65,81,0.8);        /* slate-ish */
+}
+
+/* Dark theme */
+html[data-theme="dark"] {
+    --text_color: rgba(255,255,255,0.72);          /* like an off white */
+    --background_color: #0f172a;                   /* dark blue */
+    --nav_bar_background_color:#0a1120;            /* darker blue */
+    --nav_bar_boarder_and_hover_color: rgba(255,255,255,0.1);
     --nav_bar_accent: color(srgb 0.2 0.2 0.7);
     --fig_caption_text: rgba(255,255,255,0.6);
 }
+
+/* Keep your @property if you want the animation support */
+@property --text_color{
+    syntax: "<color>";
+    inherits: true;
+    initial-value: rgba(255,255,255,0.72);
+}
+
 
 @property --text_color{
     syntax: "<color>";
@@ -27,14 +48,30 @@ a:visited{
 }
 
 body{
-    background-color: var(--background_color, #0f172a);
-    color: var(--text_color, #e6e6e6);
+    background-color: var(--background_color);
+    color: var(--text_color);
     display: grid;
     grid-template-rows: auto 1fr auto;
     min-height: 100vh;
     font-family: 'Roboto', sans-serif;
     line-height: 1.6rem;
 }
+
+#theme-toggle {
+    background-color: var(--nav_bar_background_color);
+    color: var(--text_color);
+    border: 1px solid var(--nav_bar_boarder_and_hover_color);
+    padding: 0.3rem 0.6rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+#theme-toggle:hover {
+    background-color: var(--nav_bar_boarder_and_hover_color);
+}
+
 
 main ol, main ul{
     padding-left: 1.25rem;
@@ -173,3 +210,29 @@ html{
       }
     }
   }
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 250ms;
+  animation-timing-function: ease-out;
+}
+
+/* The page you are leaving */
+::view-transition-old(root) {
+  animation-name: fade-out;
+}
+
+/* The page you are entering */
+::view-transition-new(root) {
+  animation-name: fade-in;
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

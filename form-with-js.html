@@ -1,173 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Form</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: white;
-      margin: 0;
-      padding: 1rem;
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 1rem;
-      margin-top: 0.5rem;
-    }
-
-    form{
-      max-width: 30rem;
-      margin: 0 auto;
-      background: white;
-      border: 0.1rem solid gray;
-      padding: 0.7rem;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    label{
-      display: block;
-      font-weight: bold;
-      font-size: 1rem;
-      margin: 0.5rem;
-    }
-
-    label:has(+ input:required)::after, label:has(+ textarea:required)::after {
-      content: " *";
-      color: red;
-    }
-
-    input[type="text"], input[type="email"], select, textarea {
-      width: 100%;
-      padding: 0.6rem;
-      border: 0.1rem solid #bbb;
-      border-radius: 0.25rem;
-      font-size: 1rem;
-      box-sizing: border-box;
-    }
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Personal Portfolio Contact Me Page for CSE134b">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Graydon L">
+    <title>Contact Me - Portfolio</title>
+    <link href="images/favicon.ico" rel="icon">
+    <link href="styles/main.css" rel="stylesheet">
+    <script src="scripts/site.js" defer></script>
+    <title>Contact Form with JS</title>
+    <style>
+        body {
+        font-family: Arial, sans-serif;
+        background-color: white;
+        margin: 0;
+        padding: 1rem;
+        color: var(--text_color);
+        background-color: var(--background_color);
+        }
 
 
-    input:required:invalid, textarea:required:invalid {
-      border-color: red;
-    }
+        h1 {
+        text-align: center;
+        margin-bottom: 1rem;
+        margin-top: 0.5rem;
+        }
 
-    input:valid, textarea:valid {
-      border-color: green;
-    }
+        form{
+        max-width: 30rem;
+        margin: 0 auto;
+        background: white;
+        border: 0.1rem solid gray;
+        padding: 0.7rem;
+        flex-direction: column;
+        gap: 0.5rem;
+        }
 
-    input:required:invalid:placeholder-shown,
-    textarea:required:invalid:placeholder-shown {
-      border-color: gray;
-    }
-
-    input:required:invalid:not(:placeholder-shown),
-    textarea:required:invalid:not(:placeholder-shown) {
-      border-color: red;
-    }
-
-    input:valid, textarea:valid {
-      border-color: green;
-    }
-
-    .msg { 
-      display: none; 
-      min-height: 1.1rem;
-      font-size: 0.9rem;
-    }
-    .msg.error { 
-      color: darkred;
-    }
-    .msg.info  { 
-      color: black; 
-    }
-
-    input[required]:invalid:not(:placeholder-shown) + .msg-required,
-    textarea[required]:invalid:not(:placeholder-shown) + .msg-required,
-    input[type="email"]:invalid:not(:placeholder-shown) + .msg-email {
-      display: block;
-    }
-
-    input:valid + .msg-required,
-    textarea:valid + .msg-required,
-    input:valid + .msg-email {
-      display: none;
-    }
-
-
-    input:valid ~ .msg-required,
-    textarea:valid ~ .msg-required,
-    input:valid ~ .msg-email,
-    textarea:valid ~ .msg-email {
-      display: none;
-    }
-    input[type="email"]:invalid:not(:placeholder-shown) ~ .msg-email {
-      display: block;
-    }
-
-    output {
-       display: block; min-height: 1.2em; font-size: 0.9rem; 
-    }
-
-    form:has(:invalid) #error-out::before {
-      content: "Please fix the highlighted fields or fill empty fields.";
-      color: darkred;
-    }
-
-    form:has(:required:valid):not(:has(:invalid)) #info-out::before {
-      content: "All required fields look good.";
-      color: green;
-    }
-
-
-    button {
-      margin-top: 1rem;
-      padding: 0.75rem;
-      border: 0.1rem;
-      background-color: darkgray;
-      color: black;
-      border-radius: 0.25rem;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-
-    button:hover,
-    button:focus-visible {
-    background-color: blue;
-    color: white;
-    }
-
-    output {
-      display: block;
-      min-height: 1.2em;
-      font-size: 0.9rem;
-    }
-
-    input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible {
-        outline: 0.2rem solid #005fcc;   /* high-contrast blue */
-        outline-offset: 0.15rem;
-    }
-
-    @keyframes flashBorder { 
-        0% { box-shadow: 0 0 0 0 rgba(220,0,0,.7) }
-        100% { box-shadow: 0 0 0 6px rgba(220,0,0,0) }
-    }
-    .flash { animation: flashBorder 300ms ease-out; }
-    .illegal-msg {
+        label{
         display: block;
-        color: #8b0000;
         font-weight: bold;
-        margin-top: 0.25rem;
-    }
-    #comments-counter { font-size: 0.9rem; color:#444; min-height:1.1rem; }
-    #comments-counter.warn { color:#b45309; }
-    #comments-counter.over { color:#8b0000; }
+        font-size: 1rem;
+        margin: 0.5rem;
+        }
 
-</style>
+        label:has(+ input:required)::after, label:has(+ textarea:required)::after {
+        content: " *";
+        color: red;
+        }
+
+        input[type="text"], input[type="email"], select, textarea {
+        width: 100%;
+        padding: 0.6rem;
+        border: 0.1rem solid #bbb;
+        border-radius: 0.25rem;
+        font-size: 1rem;
+        box-sizing: border-box;
+        background-color: var(--background_color);
+        color: var(--text_color);    
+        }
+
+
+        input:required:invalid, textarea:required:invalid {
+        border-color: red;
+        }
+
+        input:valid, textarea:valid {
+        border-color: green;
+        }
+
+        input:required:invalid:placeholder-shown,
+        textarea:required:invalid:placeholder-shown {
+        border-color: gray;
+        }
+
+        input:required:invalid:not(:placeholder-shown),
+        textarea:required:invalid:not(:placeholder-shown) {
+        border-color: red;
+        }
+
+        input:valid, textarea:valid {
+        border-color: green;
+        }
+
+        .msg { 
+        display: none; 
+        min-height: 1.1rem;
+        font-size: 0.9rem;
+        }
+        .msg.error { 
+        color: darkred;
+        }
+        .msg.info  { 
+        color: black; 
+        }
+
+        input[required]:invalid:not(:placeholder-shown) + .msg-required,
+        textarea[required]:invalid:not(:placeholder-shown) + .msg-required,
+        input[type="email"]:invalid:not(:placeholder-shown) + .msg-email {
+        display: block;
+        }
+
+        input:valid + .msg-required,
+        textarea:valid + .msg-required,
+        input:valid + .msg-email {
+        display: none;
+        }
+
+
+        input:valid ~ .msg-required,
+        textarea:valid ~ .msg-required,
+        input:valid ~ .msg-email,
+        textarea:valid ~ .msg-email {
+        display: none;
+        }
+        input[type="email"]:invalid:not(:placeholder-shown) ~ .msg-email {
+        display: block;
+        }
+
+        output {
+        display: block; min-height: 1.2em; font-size: 0.9rem; 
+        }
+
+        form:has(:invalid) #error-out::before {
+        content: "Please fix the highlighted fields or fill empty fields.";
+        color: darkred;
+        }
+
+        form:has(:required:valid):not(:has(:invalid)) #info-out::before {
+        content: "All required fields look good.";
+        color: green;
+        }
+
+
+        button {
+        margin-top: 1rem;
+        padding: 0.75rem;
+        border: 0.1rem;
+        background-color: darkgray;
+        color: black;
+        border-radius: 0.25rem;
+        font-size: 1rem;
+        cursor: pointer;
+        }
+
+        button:hover,
+        button:focus-visible {
+        background-color: blue;
+        color: white;
+        }
+
+        output {
+        display: block;
+        min-height: 1.2em;
+        font-size: 0.9rem;
+        }
+
+        input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible {
+            outline: 0.2rem solid #005fcc;   /* high-contrast blue */
+            outline-offset: 0.15rem;
+        }
+
+        @keyframes flashBorder { 
+            0% { box-shadow: 0 0 0 0 rgba(220,0,0,.7) }
+            100% { box-shadow: 0 0 0 6px rgba(220,0,0,0) }
+        }
+        .flash { animation: flashBorder 300ms ease-out; }
+        .illegal-msg {
+            display: block;
+            color: #8b0000;
+            font-weight: bold;
+            margin-top: 0.25rem;
+        }
+        #comments-counter { font-size: 0.9rem; color:#444; min-height:1.1rem; }
+        #comments-counter.warn { color:#b45309; }
+        #comments-counter.over { color:#8b0000; }
+
+    </style>
 </head>
 <body>
+    <header>            
+        <button id="theme-toggle" hidden type="button" aria-pressed="false">
+          Switch to Dark Theme
+        </button>
+        <noscript>
+          <p style="font-size:0.85rem;">
+              Theme toggle requires JavaScript. Default light theme is shown.
+          </p>
+        </noscript>
+    </header>
 
 
   <h1>Contact Me</h1>
